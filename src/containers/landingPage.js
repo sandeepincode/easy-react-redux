@@ -27,8 +27,19 @@ function mapDispatchToProps(dispatch) {
 class landingPage extends Component {
   render() {
     return (
-      <div className="login-clean">
-        <h2>HI THERE</h2>
+      <div>
+
+        <h2>EASY REACT REDUX</h2>
+
+        <div>
+          {this.props.error}
+        </div>
+
+        <button
+          disabled={this.props.loading}
+          onClick={this.props.fetchRequest}
+        >FETCH</button>
+
       </div>
     );
   }

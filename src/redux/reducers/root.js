@@ -62,17 +62,18 @@ export function fetchRequest () {
       type: FETCH_REQUEST
     });
 
-    const { search } = getState().login.data;
+    const { search } = getState().root.data;
 
     try {
       request({
-        url: '/FAKE/END_POINT',
+        url: 'somewebsite.co.uk/FAKE/END_POINT',
         method: 'POST',
         data: {
           search
         }
       }, (error, res, body) => {
         return new Promise((resolve, reject) => {
+
           if ( error ) {
             dispatch({
               type: FETCH_FAILURE,
@@ -80,17 +81,22 @@ export function fetchRequest () {
             });
             return reject();
           }
+
           return resolve(JSON.parse(body));
+
         }).then((resp) => {
+
           if (resp.response === 1) {
             return dispatch({
               type: FETCH_SUCCESS
             });
           }
+
           return dispatch({
             type: FETCH_FAILURE,
             payload: resp.msg,
           });
+
         });
       });
     } catch (e) {
